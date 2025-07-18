@@ -29,6 +29,7 @@
       }
       body {
         font-family: "Segoe UI", "Arial", sans-serif;
+        /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
         background: var(--gray);
         color: var(--white);
         line-height: 1.7;
@@ -59,6 +60,25 @@
         color: var(--accent);
         font-weight: bold;
         letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo-square {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      .logo-square img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px;
       }
       .nav-links {
         display: flex;
@@ -213,6 +233,34 @@
         border: 1px solid var(--divider);
         box-sizing: border-box;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 280px;
+      }
+
+      .service {
+        flex: 1;
+        background: var(--card-dark);
+        border-radius: var(--radius);
+        box-shadow: 0 2px 14px rgba(20, 20, 20, 0.07);
+        padding: 32px 28px;
+        min-width: 260px;
+        max-width: 320px;
+        margin-bottom: 18px;
+        color: var(--white);
+        border: 1px solid var(--divider);
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 180px;
+      }
+
+      .service-title {
+        font-size: 1.13rem;
+        font-weight: bold;
+        margin-bottom: 9px;
+        color: var(--accent);
       }
       .card strong {
         color: var(--accent);
@@ -234,13 +282,35 @@
       }
       .text {
         max-height: 150px;
+        flex-grow: 1;
+        margin-bottom: 20px;
       }
 
-      /* For More info... button inside card */
+      /* For More info... button inside card - always at bottom */
       .card button.btn {
         width: 100%;
-        margin-top: 12px;
+        margin-top: auto;
         position: static;
+      }
+
+      /* Blank card styling */
+      .card.blank-card {
+        background: var(--primary);
+        border: 2px dashed var(--divider);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .card.blank-card .blank-content {
+        text-align: center;
+      }
+      .card.blank-card .blank-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        color: var(--muted);
       }
 
       /* FOOTER */
@@ -297,6 +367,30 @@
         margin-top: 12px;
       }
 
+      /* ABOUT & CONTACT LAYOUT */
+      .about-contact-container {
+        display: flex;
+        gap: 60px;
+        align-items: flex-start;
+        margin-top: 40px;
+        position: relative;
+      }
+      .about-contact-container::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--divider);
+        transform: translateX(-50%);
+      }
+      .about-section,
+      .contact-section {
+        flex: 1;
+        max-width: 50%;
+      }
+
       /* FORMS */
       input,
       textarea {
@@ -331,7 +425,7 @@
           max-width: 600px;
           box-sizing: border-box;
         }
-        
+
         .hero-content .btn {
           /* Center the CTA buttons below each other on mobile */
           display: block;
@@ -345,7 +439,7 @@
           padding-right: 18px !important;
         }
         section#about p,
-        section#contact p{
+        section#contact p {
           text-align: center;
           margin-left: auto !important;
           margin-right: auto !important;
@@ -356,6 +450,21 @@
           width: 100%;
           max-width: 360px;
           box-sizing: border-box;
+        }
+
+        /* About & Contact responsive */
+        .about-contact-container {
+          flex-direction: column;
+          gap: 40px;
+          padding: 0 18px;
+        }
+        .about-contact-container::before {
+          display: none;
+        }
+        .about-section,
+        .contact-section {
+          max-width: 100%;
+          text-align: center;
         }
 
         .card-list,
@@ -441,7 +550,12 @@
   </head>
   <body>
     <nav>
-      <div class="logo">BristoHQ</div>
+      <div class="logo">
+        <div class="logo-square">
+          <img src="./logo.jpg" alt="BristoHQ Logo" />
+        </div>
+        <span>BristoHQ</span>
+      </div>
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -453,7 +567,9 @@
         <a href="#software">Our Software</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <button class="btn">Join Us</button>
+        <button class="btn" onclick="window.location.href='./career.html'">
+          Careers
+        </button>
       </div>
     </nav>
 
@@ -464,8 +580,9 @@
         <div class="hero-desc">
           Empowering your ideas with world-class <b>software solutions</b> and
           <b>digital services</b>.<br /><br />
-          @BristoHQ unlocks the next-level for your business – from web, app,
-          and game development to custom platforms and more.
+          <span style="color: #ffffff">BristoHQ</span> unlocks the next-level
+          for your business – from web, app, and game development to custom
+          platforms and more.
         </div>
         <button
           class="btn"
@@ -495,68 +612,58 @@
       <div class="section-title">Our Software</div>
       <div class="card-list">
         <div class="card">
-          <strong>Secure 2FA <span class="status">Coming Soon</span></strong>
-          <br />
-          <div class="text">
-            Next-generation two-factor authentication for web, mobile, and
-            enterprise. Currently under development.
+          <div>
+            <strong>Secure 2FA <span class="status">Coming Soon</span></strong>
+            <br />
+            <div class="text">
+              Next-generation two-factor authentication for web, mobile, and
+              enterprise. Currently under development.
+            </div>
           </div>
           <button
             class="btn"
-            onclick="window.location.href='https://bristohq.com/secure-2fa'"
+            onclick="window.location.href='https://secure2fa.bristohq.me/'"
           >
             More info...
           </button>
         </div>
-        <div class="card">
-          <strong
-            >Taskify Pro
-            <span
-              class="status"
-              style="
-                background: var(--success);
-                color: var(--primary);
-                margin-left: 10px;
-              "
-              >Live</span
-            ></strong
-          >
-          <br />
-          <div class="text">
-            Easy-to-use project management and collaboration platform for remote
-            teams.
+        <!-- <div class="card">
+          <div>
+            <strong
+              >Taskify Pro
+              <span
+                class="status"
+                style="
+                  background: var(--success);
+                  color: var(--primary);
+                  margin-left: 10px;
+                "
+                >Live</span
+              ></strong
+            >
+            <br />
+            <div class="text">
+              Easy-to-use project management and collaboration platform for
+              remote teams.
+            </div>
           </div>
           <button
             class="btn"
-            onclick="window.location.href='https://bristohq.com/taskify-pro'"
+            onclick="window.location.href='https://bristohq.me/'"
           >
             More info...
           </button>
-        </div>
-        <div class="card">
-          <strong
-            >QuizWiz EDU
-            <span
-              class="status"
-              style="
-                background: var(--success);
-                color: var(--primary);
-                margin-left: 10px;
-              "
-              >Live</span
-            ></strong
-          >
-          <br />
-          <div class="text">
-            Interactive learning and gamification system for schools and
-            coaches.
+        </div> -->
+
+        <div class="card blank-card">
+          <div class="blank-content">
+            <div class="blank-icon">💡</div>
+            <strong>Coming Soon</strong>
+            <br />
+            <div class="text">
+              New exciting project in development. Stay tuned for updates!
+            </div>
           </div>
-          <button
-            class="btn"
-            onclick="window.location.href='https://bristohq.com/quizwiz-edu'"
-          >
-            More info...
-          </button>
         </div>
       </div>
     </section>
@@ -584,56 +691,74 @@
           <div class="service-title">Consultancy & Prototyping</div>
           Strategy, UX/UI, product design, technical audits, and MVPs.
         </div>
+        <div class="service">
+          <div class="service-title">DevOps</div>
+          CI/CD pipelines, cloud deployment, and infrastructure management for
+          reliable, scalable products.
+        </div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="section-title">About BristoHQ</div>
-      <p>
-        Founded by passionate engineers and creators, <b>@BristoHQ</b> is
-        dedicated to delivering software that accelerates businesses. Our
-        mission: <em>Turn ideas into impactful digital products.</em
-        ><br /><br />
-        Why choose us?
-      </p>
-      <ul style="margin: 18px 0 0 16px">
-        <li>Led by experienced developers, product managers, and designers.</li>
-        <li>Customer-first approach with transparent communication.</li>
-        <li>Scalable solutions and continuous support post-launch.</li>
-      </ul>
-    </section>
+    <!-- About & Contact Section -->
+    <section>
+      <div class="about-contact-container">
+        <!-- About Section -->
+        <div class="about-section" id="about">
+          <div class="section-title">About BristoHQ</div>
+          <p>
+            Founded by passionate engineers and creators, <b>@BristoHQ</b> is
+            dedicated to delivering software that accelerates businesses. Our
+            mission: <em>Turn ideas into impactful digital products.</em
+            ><br /><br />
+            Why choose us?
+          </p>
+          <ul style="margin: 18px 0 0 16px">
+            <li>
+              Led by experienced developers, product managers, and designers.
+            </li>
+            <li>Customer-first approach with transparent communication.</li>
+            <li>Scalable solutions and continuous support post-launch.</li>
+          </ul>
+        </div>
 
-    <!-- Contact / CTA -->
-    <section id="contact">
-      <div class="section-title">Let's Build Together</div>
-      <p>
-        Ready to bring your vision to life? <br />
-        <b>Contact our team</b> for a free consultation, or connect via our
-        socials below.
-      </p>
-      <form
-        onsubmit="event.preventDefault();alert('Thank you! We will contact you soon.')"
-        style="margin-top: 18px; max-width: 360px"
-      >
-        <input type="text" required placeholder="Your Name" />
-        <input type="email" required placeholder="Your Email" />
-        <textarea
-          required
-          placeholder="Project Details / Message"
-          style="height: 90px"
-        ></textarea>
-        <button class="btn" style="width: 100%">Send Message</button>
-      </form>
+        <!-- Contact / CTA Section -->
+        <div class="contact-section" id="contact">
+          <div class="section-title">Let's Build Together</div>
+          <p>
+            Ready to bring your vision to life? <br />
+            <b>Contact our team</b> for a free consultation, or connect via our
+            socials below.
+          </p>
+          <form
+            style="margin-top: 18px; max-width: 360px"
+            action="https://formspree.io/f/movdnznn"
+            method="POST"
+          >
+            <input type="text" name="name" required placeholder="Your Name" />
+            <input type="email" name="email" placeholder="Your Email" />
+            <textarea
+              required
+              placeholder="Project Details / Message"
+              style="height: 90px"
+              name="message"
+            ></textarea>
+            <button class="btn" style="width: 100%">Send Message</button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <footer>
       <div class="footer-row">
         <div class="footer-col">
-          <div class="footer-logo">@BristoHQ</div>
+          <div class="footer-logo">BristoHQ</div>
           <div>Innovating digital solutions.<br />Built for your success.</div>
           <div class="social-links">
-            <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+            <a
+              href="https://x.com/@BristoHQ"
+              target="_blank"
+              aria-label="Twitter"
+            >
               <svg
                 width="19"
                 height="19"
@@ -646,7 +771,7 @@
               </svg>
             </a>
             <a
-              href="https://instagram.com/"
+              href="https://instagram.com/bristohq"
               target="_blank"
               aria-label="Instagram"
             >
@@ -662,7 +787,7 @@
               </svg>
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://linkedin.com/company/bristohq"
               target="_blank"
               aria-label="LinkedIn"
             >
@@ -689,9 +814,9 @@
         </div>
         <div class="footer-col">
           <b>Contact</b><br />
-          contact@bristohq.com<br />
+          contact@bristohq.me<br />
           +91 00000 00000<br />
-          <span style="color: var(--muted)">Bangalore, India</span>
+          <span style="color: var(--muted)">Punjab, India</span>
         </div>
       </div>
       <div class="footer-bottom">
