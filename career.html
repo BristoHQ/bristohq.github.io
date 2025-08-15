@@ -38,17 +38,17 @@
 
       /* GitHub Light Theme */
       [data-theme="github"] {
-        --primary: #ffffff;
-        --accent: #24292e;
-        --dark: #f6f8fa;
-        --gray: #ffffff;
-        --white: #24292e;
-        --card-dark: #f6f8fa;
-        --divider: #e1e4e8;
-        --muted: #586069;
-        --success: #28a745;
-        --warning: #ffd33d;
-        --danger: #d73a49;
+        --primary: #24292f; /* Dark gray for primary text */
+        --accent: #ffffff; /* White for main background */
+        --dark: #010409; /* Light gray for secondary backgrounds (e.g., cards) */
+        --gray: #010409; /* Muted gray for secondary text */
+        --white: #ffffff; /* Pure white for high-contrast elements */
+        --card-dark: #0d1117; /* Light gray for card backgrounds */
+        --divider: #151b23; /* Light gray for borders */
+        --muted: #57606a; /* Slightly darker muted text */
+        --success: #2da44e; /* Green for success states */
+        --warning: #ed8936;
+        --danger: #e53e3e;
       }
 
       /* Theme Toggle Button */
@@ -183,8 +183,9 @@
         border-color: var(--success);
       }
       .btn-primary:hover {
-        background: #5fb07f;
-        border-color: #5fb07f;
+        background: var(--success);
+        border-color: var(--success);
+        opacity: 0.8;
       }
       /* Hamburger */
       .hamburger {
@@ -514,8 +515,8 @@
           height: 100vh;
           background: linear-gradient(
             135deg,
-            rgba(0, 20, 40, 0.95) 0%,
-            rgba(0, 30, 60, 0.95) 100%
+            var(--dark) 0%,
+            var(--card-dark) 100%
           );
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
@@ -541,14 +542,14 @@
           padding: 15px 30px;
           text-align: center;
           border: none;
-          background: rgba(255, 255, 255, 0.05);
+          background: var(--card-dark);
           backdrop-filter: blur(10px);
           margin: 0;
           font-size: 1.2rem;
           font-weight: 500;
           border-radius: 15px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: white;
+          border: 1px solid var(--divider);
+          color: var(--white);
           text-decoration: none;
           transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           position: relative;
@@ -564,9 +565,9 @@
           min-width: 280px;
           margin: 8px 0;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.05);
+          background: var(--card-dark);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid var(--divider);
           opacity: 0;
           animation: mobileNavItemSlide 0.6s
             cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -606,8 +607,8 @@
         }
         .nav-links a:hover,
         .nav-links button.btn:hover {
-          background: rgba(255, 255, 255, 0.15);
-          border-color: rgba(255, 255, 255, 0.3);
+          background: var(--primary);
+          border-color: var(--success);
           transform: translateY(-2px) scale(1.05);
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
@@ -622,7 +623,7 @@
           background: linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.1),
+            var(--divider),
             transparent
           );
           transition: left 0.5s;
@@ -632,12 +633,13 @@
           left: 100%;
         }
         .nav-links button.btn {
-          background: linear-gradient(135deg, var(--primary) 0%, #1e88e5 100%);
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: var(--success);
+          color: var(--primary);
+          border: 1px solid var(--success);
         }
         .nav-links button.btn:hover {
-          background: linear-gradient(135deg, #1e88e5 0%, var(--primary) 100%);
+          background: var(--success);
+          opacity: 0.8;
         }
         .hamburger {
           display: flex;
