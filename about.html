@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Careers – BristoHQ</title>
+    <title>About Us – BristoHQ</title>
     <link rel="icon" type="image/x-icon" href="./logo.jpg" />
     <style>
       :root {
@@ -38,17 +38,15 @@
 
       /* GitHub Light Theme */
       [data-theme="github"] {
-        --primary: #ffffff;
-        --accent: #24292e;
-        --dark: #f6f8fa;
-        --gray: #ffffff;
-        --white: #24292e;
-        --card-dark: #f6f8fa;
-        --divider: #e1e4e8;
-        --muted: #586069;
-        --success: #28a745;
-        --warning: #ffd33d;
-        --danger: #d73a49;
+        --primary: #24292f; /* Dark gray for primary text */
+        --accent: #ffffff; /* White for main background */
+        --dark: #010409; /* Light gray for secondary backgrounds (e.g., cards) */
+        --gray: #010409; /* Muted gray for secondary text */
+        --white: #ffffff; /* Pure white for high-contrast elements */
+        --card-dark: #0d1117; /* Light gray for card backgrounds */
+        --divider: #151b23; /* Light gray for borders */
+        --muted: #57606a; /* Slightly darker muted text */
+        --success: #2da44e; /* Green for success states */
       }
 
       /* Theme Toggle Button */
@@ -249,15 +247,36 @@
         margin-right: auto;
       }
 
-      /* JOB CARDS */
-      .jobs-grid {
+      /* ABOUT SECTIONS */
+      .about-section {
+        margin-bottom: 40px;
+      }
+      .about-section h2 {
+        font-size: 1.8rem;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+      .about-section p {
+        color: var(--white);
+        margin-bottom: 20px;
+      }
+      .about-section ul {
+        padding-left: 20px;
+        color: var(--white);
+      }
+      .about-section li {
+        margin-bottom: 8px;
+      }
+
+      /* TEAM CARDS */
+      .team-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 32px;
         margin-top: 28px;
         width: 100%;
       }
-      .job-card {
+      .team-card {
         background: var(--card-dark);
         border-radius: var(--radius);
         box-shadow: 0 2px 14px rgba(20, 20, 20, 0.07);
@@ -265,159 +284,159 @@
         color: var(--white);
         border: 1px solid var(--divider);
         box-sizing: border-box;
-        cursor: pointer;
+        text-align: center;
         transition: transform 0.2s, box-shadow 0.2s;
       }
-      .job-card:hover {
+      .team-card:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 20px rgba(20, 20, 20, 0.15);
       }
-      .job-title {
+      .team-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--divider);
+        margin: 0 auto 16px;
+        object-fit: cover;
+      }
+      .team-name {
         font-size: 1.3rem;
         font-weight: bold;
         color: var(--accent);
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
-      .job-meta {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 16px;
-        flex-wrap: wrap;
-      }
-      .job-badge {
-        background: var(--divider);
-        color: var(--accent);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 500;
-      }
-      .job-badge.remote {
-        background: var(--success);
-        color: var(--primary);
-      }
-      .job-badge.urgent {
-        background: var(--warning);
-        color: var(--primary);
-      }
-      .job-description {
+      .team-role {
+        font-size: 1rem;
         color: var(--muted);
-        margin-bottom: 20px;
-        line-height: 1.6;
-      }
-      .job-posted {
-        font-size: 0.9rem;
-        color: var(--muted);
-        margin-bottom: 20px;
-      }
-
-      /* NO JOBS STATE */
-      .no-jobs {
-        text-align: center;
-        padding: 80px 20px;
-        background: var(--card-dark);
-        border-radius: var(--radius);
-        border: 1px solid var(--divider);
-        margin-top: 40px;
-      }
-      .no-jobs-icon {
-        font-size: 4rem;
-        color: var(--muted);
-        margin-bottom: 20px;
-      }
-      .no-jobs h3 {
-        color: var(--accent);
-        font-size: 1.5rem;
         margin-bottom: 12px;
       }
-      .no-jobs p {
-        color: var(--muted);
-        max-width: 400px;
-        margin: 0 auto 24px auto;
+      .team-bio {
+        color: var(--white);
+        font-size: 0.95rem;
+        line-height: 1.6;
       }
 
-      /* JOB DETAIL MODAL */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        overflow-y: auto;
+      /* CSS-based user avatar for missing images */
+      .team-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--divider);
+        margin: 0 auto 16px;
+        object-fit: cover;
+        position: relative;
+        overflow: hidden;
       }
-      .modal.active {
+
+      .team-photo.dummy-avatar {
+        background: linear-gradient(135deg, var(--success), var(--accent));
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        text-transform: uppercase;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
-      .modal-content {
+
+      .team-photo.dummy-avatar::before {
+        content: attr(data-initials);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Alternative user icon approach */
+      .team-photo.user-icon {
         background: var(--card-dark);
-        border-radius: var(--radius);
-        padding: 40px;
-        max-width: 700px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        position: relative;
-        border: 1px solid var(--divider);
-        margin: auto;
-      }
-      .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 25px;
-        background: none;
-        border: none;
-        color: var(--muted);
-        font-size: 2rem;
-        cursor: pointer;
-        transition: color 0.2s;
-      }
-      .modal-close:hover {
-        color: var(--accent);
-      }
-      .job-detail-title {
-        font-size: 2rem;
-        color: var(--accent);
-        margin-bottom: 20px;
-        padding-right: 40px;
-      }
-      .job-detail-meta {
+        border: 2px solid var(--divider);
         display: flex;
-        gap: 12px;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
       }
-      .job-section {
-        margin-bottom: 30px;
+
+      .team-photo.user-icon::before {
+        content: "👤";
+        font-size: 3rem;
+        opacity: 0.7;
       }
-      .job-section h3 {
-        color: var(--accent);
-        font-size: 1.2rem;
-        margin-bottom: 12px;
+
+      /* SKELETON LOADING ANIMATIONS */
+      @keyframes skeleton-loading {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
       }
-      .job-section p,
-      .job-section ul {
-        color: var(--white);
-        line-height: 1.7;
+
+      .skeleton {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--divider);
+        background-image: linear-gradient(
+          90deg,
+          var(--divider),
+          var(--card-dark),
+          var(--divider)
+        );
+        background-size: 200px 100%;
+        background-repeat: no-repeat;
+        animation: skeleton-loading 1.5s ease-in-out infinite;
       }
-      .job-section ul {
-        padding-left: 20px;
+
+      .team-card.skeleton-team {
+        position: relative;
+        pointer-events: none;
       }
-      .job-section li {
+
+      .team-card.skeleton-team .skeleton-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 16px;
+      }
+
+      .team-card.skeleton-team .skeleton-name {
+        height: 20px;
+        width: 70%;
+        border-radius: 4px;
+        margin: 0 auto 8px;
+      }
+
+      .team-card.skeleton-team .skeleton-role {
+        height: 16px;
+        width: 50%;
+        border-radius: 4px;
+        margin: 0 auto 12px;
+      }
+
+      .team-card.skeleton-team .skeleton-bio {
+        height: 14px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+      }
+
+      .team-card.skeleton-team .skeleton-bio:last-of-type {
+        width: 80%;
+      }
+
+      .about-section.skeleton-section .skeleton-heading {
+        height: 28px;
+        width: 40%;
+        border-radius: 4px;
+        margin-bottom: 16px;
+      }
+
+      .about-section.skeleton-section .skeleton-paragraph {
+        height: 16px;
+        border-radius: 4px;
         margin-bottom: 8px;
       }
-      .apply-section {
-        background: var(--primary);
-        padding: 30px;
-        border-radius: var(--radius);
-        margin-top: 30px;
-        text-align: center;
-        border: 1px solid var(--divider);
+
+      .about-section.skeleton-section .skeleton-paragraph:last-of-type {
+        width: 85%;
       }
 
       /* FOOTER */
@@ -488,19 +507,9 @@
         section {
           padding: 20px 3vw;
         }
-        .jobs-grid {
+        .team-grid {
           grid-template-columns: 1fr;
           gap: 20px;
-        }
-        .job-card {
-          padding: 24px 20px;
-        }
-        .modal-content {
-          padding: 30px 20px;
-          margin: 20px;
-        }
-        .job-detail-title {
-          font-size: 1.6rem;
         }
         .footer-row {
           flex-direction: column;
@@ -572,7 +581,6 @@
             cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           padding: 12px 8px;
           min-height: 60px;
-          animation-delay: 0.15s;
         }
 
         .nav-links .theme-toggle .theme-option {
@@ -749,90 +757,6 @@
         }
       }
 
-      @keyframes modalSlideIn {
-        from {
-          opacity: 0;
-          transform: translateY(-50px) scale(0.9);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      /* SKELETON LOADING ANIMATIONS */
-      @keyframes skeleton-loading {
-        0% {
-          background-position: -200px 0;
-        }
-        100% {
-          background-position: calc(200px + 100%) 0;
-        }
-      }
-
-      .skeleton {
-        display: inline-block;
-        position: relative;
-        overflow: hidden;
-        background-color: var(--divider);
-        background-image: linear-gradient(
-          90deg,
-          var(--divider),
-          var(--card-dark),
-          var(--divider)
-        );
-        background-size: 200px 100%;
-        background-repeat: no-repeat;
-        animation: skeleton-loading 1.5s ease-in-out infinite;
-      }
-
-      .job-card.skeleton-job {
-        position: relative;
-        pointer-events: none;
-      }
-
-      .job-card.skeleton-job .skeleton-job-title {
-        height: 24px;
-        width: 70%;
-        border-radius: 4px;
-        margin-bottom: 12px;
-      }
-
-      .job-card.skeleton-job .skeleton-job-badges {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 16px;
-      }
-
-      .job-card.skeleton-job .skeleton-badge {
-        height: 24px;
-        width: 80px;
-        border-radius: 12px;
-      }
-
-      .job-card.skeleton-job .skeleton-job-description {
-        height: 16px;
-        border-radius: 4px;
-        margin-bottom: 8px;
-      }
-
-      .job-card.skeleton-job .skeleton-job-description:last-of-type {
-        width: 60%;
-        margin-bottom: 20px;
-      }
-
-      .job-card.skeleton-job .skeleton-job-posted {
-        height: 14px;
-        width: 40%;
-        border-radius: 4px;
-        margin-bottom: 20px;
-      }
-
-      .job-card.skeleton-job .skeleton-job-button {
-        height: 40px;
-        border-radius: var(--radius);
-      }
-
       /* Apply animations to elements */
       .page-header {
         animation: fadeInUp 1s ease-out;
@@ -846,42 +770,50 @@
         animation: fadeInUp 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
       }
 
-      .section-title {
+      .about-section {
         animation: fadeInLeft 0.8s ease-out;
       }
 
-      .job-card {
+      .about-section:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .about-section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .about-section:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .about-section:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .team-card {
         animation: scaleIn 0.6s ease-out;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
-      .job-card:nth-child(1) {
+      .team-card:nth-child(1) {
         animation-delay: 0.1s;
       }
 
-      .job-card:nth-child(2) {
+      .team-card:nth-child(2) {
         animation-delay: 0.2s;
       }
 
-      .job-card:nth-child(3) {
+      .team-card:nth-child(3) {
         animation-delay: 0.3s;
       }
 
-      .job-card:nth-child(4) {
+      .team-card:nth-child(4) {
         animation-delay: 0.4s;
       }
 
-      .job-card:hover {
+      .team-card:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 12px 30px rgba(20, 20, 20, 0.2);
-      }
-
-      .no-jobs {
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .modal.active .modal-content {
-        animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .btn:hover {
@@ -903,11 +835,8 @@
         }
       }
       @media (max-width: 480px) {
-        .jobs-grid {
+        .team-grid {
           grid-template-columns: 1fr;
-        }
-        .modal-content {
-          padding: 20px 15px;
         }
       }
     </style>
@@ -929,8 +858,8 @@
         <a href="index.html">Home</a>
         <a href="index.html#services">Services</a>
         <a href="index.html#software">Our Software</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
         <div class="theme-toggle" id="themeToggle">
           <button class="theme-option" data-theme="dark">Dark</button>
           <button class="theme-option" data-theme="light">Light</button>
@@ -944,48 +873,91 @@
 
     <!-- Page Header -->
     <div class="page-header">
-      <div class="page-title">Join Our Team</div>
+      <div class="page-title">About BristoHQ</div>
       <div class="page-desc">
-        Build the future of software with BristoHQ. We're looking for passionate
-        developers, designers, and innovators to join our growing team.
+        Learn more about our mission, vision, and the team driving innovation in
+        digital solutions.
       </div>
     </div>
 
-    <!-- Jobs Section -->
-    <section id="jobs">
-      <div class="section-title">Open Positions</div>
-
-      <!-- Jobs Grid - Will be populated by JavaScript -->
-      <div class="jobs-grid" id="jobsGrid">
-        <!-- Jobs will be inserted here -->
-      </div>
-
-      <!-- No Jobs Available State -->
-      <div class="no-jobs" id="noJobs" style="display: none">
-        <div class="no-jobs-icon">💼</div>
-        <h3>No Open Positions</h3>
+    <!-- About Section -->
+    <section id="about">
+      <div class="about-section">
+        <h2>Our Story</h2>
         <p>
-          We don't have any open positions right now, but we're always looking
-          for talented individuals. Check back soon or send us your resume!
+          BristoHQ was founded in 2025 with a vision to revolutionize the way
+          businesses approach software development. Starting as a small team of
+          passionate developers, we've grown into a full-service digital agency
+          serving clients worldwide.
         </p>
-        <button
-          class="btn btn-primary"
-          onclick="window.location.href='index.html#contact'"
-        >
-          Get In Touch
-        </button>
+        <p>
+          Our journey has been marked by innovation, dedication, and a
+          commitment to excellence. Today, we specialize in creating custom
+          software solutions that drive business growth and efficiency.
+        </p>
       </div>
-    </section>
 
-    <!-- Job Detail Modal -->
-    <div class="modal" id="jobModal">
-      <div class="modal-content">
-        <button class="modal-close" onclick="closeJobModal()">&times;</button>
-        <div id="jobDetails">
-          <!-- Job details will be inserted here -->
-        </div>
+      <div class="about-section">
+        <h2>Our Mission</h2>
+        <p>
+          To empower businesses with cutting-edge technology solutions that
+          simplify complex problems and accelerate growth in the digital age.
+        </p>
       </div>
-    </div>
+
+      <div class="about-section">
+        <h2>Our Values</h2>
+        <ul>
+          <li>
+            Innovation: Constantly pushing the boundaries of what's possible.
+          </li>
+          <li>
+            Integrity: Building trust through honest and transparent practices.
+          </li>
+          <li>
+            Excellence: Delivering high-quality solutions that exceed
+            expectations.
+          </li>
+          <li>
+            Collaboration: Working closely with clients to achieve shared
+            success.
+          </li>
+        </ul>
+      </div>
+
+      <!-- <div class="about-section">
+        <h2>Meet Our Team</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-photo dummy-avatar" data-initials="JD"></div>
+            <div class="team-name">John Doe</div>
+            <div class="team-role">CEO & Founder</div>
+            <div class="team-bio">
+              With over 15 years in tech, John leads BristoHQ with a focus on
+              strategic innovation.
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo dummy-avatar" data-initials="JS"></div>
+            <div class="team-name">Jane Smith</div>
+            <div class="team-role">CTO</div>
+            <div class="team-bio">
+              Jane oversees our technical operations, ensuring we stay at the
+              forefront of technology.
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo dummy-avatar" data-initials="AJ"></div>
+            <div class="team-name">Alex Johnson</div>
+            <div class="team-role">Lead Designer</div>
+            <div class="team-bio">
+              Alex brings creativity and user-centric design to all our
+              projects.
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </section>
 
     <footer>
       <div class="footer-row">
@@ -1048,8 +1020,8 @@
           <a href="index.html">Home</a><br />
           <a href="index.html#services">Services</a><br />
           <a href="index.html#software">Our Software</a><br />
-          <a href="index.html#about">About</a><br />
-          <a href="index.html#contact">Contact</a>
+          <a href="about.html">About</a><br />
+          <a href="contact.html">Contact</a>
         </div>
         <div class="footer-col">
           <b>Contact</b><br />
@@ -1095,203 +1067,16 @@
         setupThemeToggle() {
           const themeOptions = document.querySelectorAll(".theme-option");
           themeOptions.forEach((option) => {
-            option.addEventListener("click", (e) => {
-              e.preventDefault();
-              const theme = option.dataset.theme;
-              this.setTheme(theme);
+            option.addEventListener("click", () => {
+              this.setTheme(option.dataset.theme);
             });
           });
         },
       };
 
-      // Sample job data - Replace this with your actual data source
-      const jobsData = [
-        // Uncomment below to show sample jobs
-        /* 
-        {
-          id: 1,
-          title: "Senior Full Stack Developer",
-          type: "Full-time",
-          location: "Remote",
-          urgent: false,
-          description: "We're looking for an experienced full stack developer to join our growing team...",
-          postedDate: "Posted 3 days ago",
-          salary: "₹8-15 LPA",
-          experience: "3-5 years",
-          skills: ["React", "Node.js", "TypeScript", "MongoDB"],
-          responsibilities: [
-            "Develop and maintain web applications using modern technologies",
-            "Collaborate with cross-functional teams to define and implement features",
-            "Write clean, maintainable, and efficient code",
-            "Participate in code reviews and technical discussions"
-          ],
-          requirements: [
-            "3+ years of experience in full stack development",
-            "Strong proficiency in React and Node.js",
-            "Experience with TypeScript and modern JavaScript",
-            "Knowledge of database design and optimization",
-            "Excellent problem-solving and communication skills"
-          ]
-        },
-        {
-          id: 2,
-          title: "UI/UX Designer",
-          type: "Full-time", 
-          location: "Bangalore",
-          urgent: true,
-          description: "Join our design team to create beautiful and intuitive user experiences...",
-          postedDate: "Posted 1 day ago",
-          salary: "₹6-12 LPA",
-          experience: "2-4 years",
-          skills: ["Figma", "Adobe Creative Suite", "Prototyping", "User Research"],
-          responsibilities: [
-            "Design user interfaces for web and mobile applications",
-            "Conduct user research and usability testing",
-            "Create wireframes, prototypes, and design systems",
-            "Collaborate with developers to implement designs"
-          ],
-          requirements: [
-            "2+ years of experience in UI/UX design",
-            "Proficiency in Figma and Adobe Creative Suite",
-            "Strong portfolio showcasing design projects",
-            "Understanding of user-centered design principles",
-            "Experience with design systems and component libraries"
-          ]
-        }
-          */
-      ];
-
-      // DOM elements
-      const jobsGrid = document.getElementById("jobsGrid");
-      const noJobsElement = document.getElementById("noJobs");
-      const jobModal = document.getElementById("jobModal");
-      const jobDetails = document.getElementById("jobDetails");
-
-      // Render jobs or no jobs message
-      function renderJobs() {
-        if (jobsData.length === 0) {
-          jobsGrid.style.display = "none";
-          noJobsElement.style.display = "block";
-        } else {
-          jobsGrid.style.display = "grid";
-          noJobsElement.style.display = "none";
-
-          jobsGrid.innerHTML = jobsData
-            .map(
-              (job) => `
-            <div class="job-card" onclick="showJobDetails(${job.id})">
-              <div class="job-title">${job.title}</div>
-              <div class="job-meta">
-                <span class="job-badge">${job.type}</span>
-                <span class="job-badge ${
-                  job.location === "Remote" ? "remote" : ""
-                }">${job.location}</span>
-                ${
-                  job.urgent
-                    ? '<span class="job-badge urgent">Urgent</span>'
-                    : ""
-                }
-                <span class="job-badge">${job.salary}</span>
-              </div>
-              <div class="job-description">${job.description}</div>
-              <div class="job-posted">${job.postedDate}</div>
-              <button class="btn" onclick="event.stopPropagation(); showJobDetails(${
-                job.id
-              })">
-                View Details
-              </button>
-            </div>
-          `
-            )
-            .join("");
-        }
-      }
-
-      // Show job details in modal
-      function showJobDetails(jobId) {
-        const job = jobsData.find((j) => j.id === jobId);
-        if (!job) return;
-
-        jobDetails.innerHTML = `
-          <div class="job-detail-title">${job.title}</div>
-          <div class="job-detail-meta">
-            <span class="job-badge">${job.type}</span>
-            <span class="job-badge ${
-              job.location === "Remote" ? "remote" : ""
-            }">${job.location}</span>
-            ${job.urgent ? '<span class="job-badge urgent">Urgent</span>' : ""}
-            <span class="job-badge">${job.salary}</span>
-            <span class="job-badge">${job.experience}</span>
-          </div>
-          
-          <div class="job-section">
-            <h3>About the Role</h3>
-            <p>${job.description}</p>
-          </div>
-
-          <div class="job-section">
-            <h3>Key Responsibilities</h3>
-            <ul>
-              ${job.responsibilities.map((resp) => `<li>${resp}</li>`).join("")}
-            </ul>
-          </div>
-
-          <div class="job-section">
-            <h3>Requirements</h3>
-            <ul>
-              ${job.requirements.map((req) => `<li>${req}</li>`).join("")}
-            </ul>
-          </div>
-
-          <div class="job-section">
-            <h3>Required Skills</h3>
-            <div class="job-meta">
-              ${job.skills
-                .map((skill) => `<span class="job-badge">${skill}</span>`)
-                .join("")}
-            </div>
-          </div>
-
-          <div class="apply-section">
-            <h3 style="color: var(--accent); margin-bottom: 15px;">Ready to Apply?</h3>
-            <p style="margin-bottom: 20px;">Send your resume and portfolio to get started with ${
-              job.title
-            }</p>
-            <button class="btn btn-primary" onclick="applyForJob('${
-              job.title
-            }')">
-              Apply Now
-            </button>
-            <button class="btn" onclick="closeJobModal()" style="margin-left: 10px;">
-              Close
-            </button>
-          </div>
-        `;
-
-        jobModal.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-      // Close job modal
-      function closeJobModal() {
-        jobModal.classList.remove("active");
-        document.body.style.overflow = "auto";
-      }
-
-      // Apply for job
-      function applyForJob(jobTitle) {
-        const subject = encodeURIComponent(`Application for ${jobTitle}`);
-        const body = encodeURIComponent(
-          `Hi BristoHQ Team,\n\nI am interested in applying for the ${jobTitle} position. Please find my resume attached.\n\nBest regards,`
-        );
-        window.location.href = `mailto:hr@bristohq.me?subject=${subject}&body=${body}`;
-      }
-
-      // Close modal when clicking outside
-      jobModal.addEventListener("click", function (e) {
-        if (e.target === jobModal) {
-          closeJobModal();
-        }
+      // Initialize theme on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        themeManager.init();
       });
 
       // Intersection Observer for scroll animations
@@ -1310,68 +1095,96 @@
       }, observerOptions);
 
       // Observe elements for scroll animations
-      function setupScrollAnimations() {
+      document.addEventListener("DOMContentLoaded", () => {
+        // Show skeleton loading for team cards temporarily
+        showSkeletonLoading();
+
         const animatedElements = document.querySelectorAll(
-          ".section-title, .job-card, .no-jobs, footer"
+          ".about-section, .team-card, footer"
         );
         animatedElements.forEach((el) => {
           el.style.animationPlayState = "paused";
           observer.observe(el);
         });
-      }
+      });
 
-      // Show skeleton loading for job cards
-      function showJobSkeletonLoading() {
-        const jobsGrid = document.getElementById("jobsGrid");
-        const noJobsElement = document.getElementById("noJobs");
+      // Skeleton loading functionality
+      function showSkeletonLoading() {
+        const teamGrid = document.querySelector(".team-grid");
+        const aboutSections = document.querySelectorAll(".about-section");
 
-        // Hide no-jobs element temporarily
-        noJobsElement.style.display = "none";
+        // Show skeleton for team cards
+        if (teamGrid) {
+          const teamCards = teamGrid.querySelectorAll(".team-card");
+          teamCards.forEach((card) => {
+            card.classList.add("skeleton-team");
+            card.innerHTML = `
+              <div class="skeleton skeleton-avatar"></div>
+              <div class="skeleton skeleton-name"></div>
+              <div class="skeleton skeleton-role"></div>
+              <div class="skeleton skeleton-bio"></div>
+              <div class="skeleton skeleton-bio"></div>
+              <div class="skeleton skeleton-bio"></div>
+            `;
+          });
 
-        // Create skeleton job cards
-        jobsGrid.innerHTML = `
-          <div class="job-card skeleton-job">
-            <div class="skeleton skeleton-job-title"></div>
-            <div class="skeleton-job-badges">
-              <div class="skeleton skeleton-badge"></div>
-              <div class="skeleton skeleton-badge"></div>
-            </div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-posted"></div>
-            <div class="skeleton skeleton-job-button"></div>
-          </div>
-          <div class="job-card skeleton-job">
-            <div class="skeleton skeleton-job-title"></div>
-            <div class="skeleton-job-badges">
-              <div class="skeleton skeleton-badge"></div>
-              <div class="skeleton skeleton-badge"></div>
-              <div class="skeleton skeleton-badge"></div>
-            </div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-posted"></div>
-            <div class="skeleton skeleton-job-button"></div>
-          </div>
-          <div class="job-card skeleton-job">
-            <div class="skeleton skeleton-job-title"></div>
-            <div class="skeleton-job-badges">
-              <div class="skeleton skeleton-badge"></div>
-            </div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-description"></div>
-            <div class="skeleton skeleton-job-posted"></div>
-            <div class="skeleton skeleton-job-button"></div>
-          </div>
-        `;
+          // Restore team cards after 2.5 seconds
+          setTimeout(() => {
+            const teamData = [
+              {
+                initials: "JD",
+                name: "John Doe",
+                role: "CEO & Founder",
+                bio: "With over 15 years in tech, John leads BristoHQ with a focus on strategic innovation.",
+              },
+              {
+                initials: "JS",
+                name: "Jane Smith",
+                role: "CTO",
+                bio: "Jane oversees our technical operations, ensuring we stay at the forefront of technology.",
+              },
+              {
+                initials: "AJ",
+                name: "Alex Johnson",
+                role: "Lead Designer",
+                bio: "Alex brings creativity and user-centric design to all our projects.",
+              },
+            ];
 
-        // Remove skeleton and render actual jobs after 2 seconds
-        setTimeout(() => {
-          renderJobs();
-        }, 2000);
+            teamCards.forEach((card, index) => {
+              card.classList.remove("skeleton-team");
+              if (teamData[index]) {
+                card.innerHTML = `
+                  <div class="team-photo dummy-avatar" data-initials="${teamData[index].initials}"></div>
+                  <div class="team-name">${teamData[index].name}</div>
+                  <div class="team-role">${teamData[index].role}</div>
+                  <div class="team-bio">${teamData[index].bio}</div>
+                `;
+              }
+            });
+          }, 2500);
+        }
+
+        // Show skeleton for about sections
+        aboutSections.forEach((section, index) => {
+          if (index < 3) {
+            // Only for first 3 sections
+            section.classList.add("skeleton-section");
+            const originalContent = section.innerHTML;
+            section.innerHTML = `
+              <div class="skeleton skeleton-heading"></div>
+              <div class="skeleton skeleton-paragraph"></div>
+              <div class="skeleton skeleton-paragraph"></div>
+              <div class="skeleton skeleton-paragraph"></div>
+            `;
+
+            // Restore content after delay
+            setTimeout(() => {
+              section.classList.remove("skeleton-section");
+              section.innerHTML = originalContent;
+            }, 1500 + index * 200);
+          }
+        });
       }
 
       // Mobile navigation
@@ -1388,13 +1201,6 @@
           navLinks.classList.remove("open");
           hamburger.classList.remove("active");
         }
-      });
-
-      // Initialize page
-      document.addEventListener("DOMContentLoaded", function () {
-        themeManager.init();
-        showJobSkeletonLoading();
-        setupScrollAnimations();
       });
     </script>
   </body>

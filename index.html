@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="BristoHQ" />
     <meta
@@ -26,6 +25,70 @@
         --divider: #2c2d2f;
         --muted: #979797;
         --success: #72d39b;
+      }
+
+      /* Light Theme */
+      [data-theme="light"] {
+        --primary: #ffffff;
+        --accent: #1a1a1a;
+        --dark: #f8f9fa;
+        --gray: #ffffff;
+        --white: #2d3748;
+        --card-dark: #f7fafc;
+        --divider: #e2e8f0;
+        --muted: #718096;
+        --success: #48bb78;
+      }
+
+      /* GitHub Light Theme */
+      [data-theme="github"] {
+        --primary: #24292f; /* Dark gray for primary text */
+        --accent: #ffffff; /* White for main background */
+        --dark: #010409; /* Light gray for secondary backgrounds (e.g., cards) */
+        --gray: #010409; /* Muted gray for secondary text */
+        --white: #ffffff; /* Pure white for high-contrast elements */
+        --card-dark: #0d1117; /* Light gray for card backgrounds */
+        --divider: #151b23; /* Light gray for borders */
+        --muted: #57606a; /* Slightly darker muted text */
+        --success: #2da44e; /* Green for success states */
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card-dark);
+        border: 1px solid var(--divider);
+        border-radius: 20px;
+        padding: 6px 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .theme-option {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--muted);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        white-space: nowrap;
+      }
+
+      .theme-option.active {
+        background: var(--success);
+        color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .theme-option:hover:not(.active) {
+        color: var(--accent);
+        background: var(--divider);
       }
       * {
         margin: 0;
@@ -188,6 +251,7 @@
       .hero-art {
         flex: 1;
         min-width: 320px;
+        max-width: 444px;
         height: 260px;
         display: flex;
         align-items: center;
@@ -444,6 +508,20 @@
       }
 
       /* RESPONSIVENESS */
+      @media (max-width: 900px) {
+        .hero {
+          justify-content: center;
+          text-align: center;
+        }
+        .hero-content {
+          max-width: 100%;
+          margin-bottom: 30px;
+        }
+        .hero-art {
+          margin: 0 auto;
+        }
+      }
+
       @media (max-width: 880px) {
         nav {
           padding: 14px 3vw;
@@ -464,6 +542,12 @@
           margin: 15px auto 0 auto;
           width: 90%;
           max-width: 300px;
+        }
+
+        .hero-art {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         section#about,
         section#contact {
@@ -520,45 +604,462 @@
         }
         /* Navbar: hamburger */
         .nav-links {
-          position: absolute;
-          background: var(--dark);
+          position: fixed;
+          background: linear-gradient(
+            135deg,
+            var(--dark) 0%,
+            rgba(22, 23, 24, 0.98) 100%
+          );
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           right: 0;
-          top: 100%;
+          top: 0;
           width: 100vw;
-          max-width: none;
-          border-radius: 0 0 var(--radius) var(--radius);
+          height: 100vh;
           flex-direction: column;
           gap: 0;
-          align-items: flex-start;
-          padding: 0 0 0 0;
+          align-items: center;
+          justify-content: center;
+          padding: 80px 20px 40px;
           display: none;
+          z-index: 40;
+          overflow: hidden;
         }
+
+        .nav-links::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(
+            circle at 50% 50%,
+            rgba(114, 211, 155, 0.1) 0%,
+            transparent 70%
+          );
+          pointer-events: none;
+        }
+
         .nav-links.open {
           display: flex;
-          animation: navDrop 0.25s;
+          animation: mobileNavSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .nav-links a,
         .nav-links button.btn {
-          width: 100%;
-          padding: 15px 5vw;
-          text-align: left;
-          border: none;
-          background: none;
-          margin: 0;
-          font-size: 1.15rem;
-        }
-        .nav-links a:not(:first-child) {
-          border-top: 1px solid var(--divider);
-        }
-        .nav-links button.btn {
-          margin: 0 0 10px 0;
-          background: var(--primary);
+          width: 85vw;
+          max-width: 400px;
+          min-width: 280px;
+          padding: 18px 32px;
+          text-align: center;
+          border: 2px solid transparent;
+          background: rgba(34, 35, 39, 0.8);
+          backdrop-filter: blur(10px);
+          margin: 8px 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          border-radius: 16px;
           color: var(--accent);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(30px);
         }
+
+        .nav-links .theme-toggle {
+          width: 85vw;
+          max-width: 400px;
+          min-width: 280px;
+          margin: 8px 0;
+          justify-content: center;
+          background: rgba(34, 35, 39, 0.8);
+          backdrop-filter: blur(10px);
+          border: 2px solid transparent;
+          opacity: 0;
+          transform: translateY(30px);
+          padding: 12px 8px;
+          min-height: 60px;
+        }
+
+        .nav-links .theme-toggle .theme-option {
+          padding: 8px 16px;
+          font-size: 0.9rem;
+          min-height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-links a::before,
+        .nav-links button.btn::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(114, 211, 155, 0.3),
+            transparent
+          );
+          transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links button.btn:hover::before {
+          left: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links button.btn:hover {
+          border-color: var(--success);
+          background: rgba(114, 211, 155, 0.15);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(114, 211, 155, 0.2);
+        }
+
+        .nav-links.open a:nth-child(1) {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s
+            forwards;
+        }
+        .nav-links.open a:nth-child(2) {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s
+            forwards;
+        }
+        .nav-links.open a:nth-child(3) {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s
+            forwards;
+        }
+        .nav-links.open a:nth-child(4) {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s
+            forwards;
+        }
+        .nav-links.open a:nth-child(5) {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s
+            forwards;
+        }
+        .nav-links.open .theme-toggle {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.6s
+            forwards;
+        }
+        .nav-links.open button.btn {
+          animation: mobileNavItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.7s
+            forwards;
+          background: linear-gradient(
+            135deg,
+            var(--success),
+            #5fb07f
+          ) !important;
+          color: var(--primary) !important;
+          border-color: var(--success);
+          font-weight: bold;
+        }
+
+        .nav-links button.btn:hover {
+          background: linear-gradient(
+            135deg,
+            #5fb07f,
+            var(--success)
+          ) !important;
+          transform: translateY(-2px) scale(1.05);
+        }
+
         .hamburger {
           display: flex;
+          z-index: 50;
+          position: relative;
+        }
+
+        .hamburger.active {
+          z-index: 50;
         }
       }
+
+      /* ANIMATIONS */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+        60% {
+          transform: translateY(-4px);
+        }
+      }
+
+      /* SKELETON LOADING ANIMATIONS */
+      @keyframes skeleton-loading {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
+      }
+
+      .skeleton {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--divider);
+        background-image: linear-gradient(
+          90deg,
+          var(--divider),
+          var(--card-dark),
+          var(--divider)
+        );
+        background-size: 200px 100%;
+        background-repeat: no-repeat;
+        animation: skeleton-loading 1.5s ease-in-out infinite;
+      }
+
+      .card.skeleton-card {
+        position: relative;
+        pointer-events: none;
+      }
+
+      .card.skeleton-card .skeleton-header {
+        height: 80px;
+        border-radius: var(--radius);
+        margin-bottom: 16px;
+      }
+
+      .card.skeleton-card .skeleton-title {
+        height: 20px;
+        width: 70%;
+        border-radius: 4px;
+        margin-bottom: 12px;
+      }
+
+      .card.skeleton-card .skeleton-text {
+        height: 14px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      .card.skeleton-card .skeleton-text:last-of-type {
+        width: 60%;
+      }
+
+      .card.skeleton-card .skeleton-button {
+        height: 40px;
+        border-radius: var(--radius);
+        margin-top: 20px;
+      }
+
+      .service.skeleton-service .skeleton-service-title {
+        height: 18px;
+        width: 80%;
+        border-radius: 4px;
+        margin-bottom: 12px;
+      }
+
+      .service.skeleton-service .skeleton-service-text {
+        height: 14px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+      }
+
+      .service.skeleton-service .skeleton-service-text:last-of-type {
+        width: 75%;
+      }
+
+      /* Apply animations to elements */
+      .hero {
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero-title {
+        animation: slideInFromLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .hero-desc {
+        animation: fadeInLeft 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+      }
+
+      .hero button {
+        animation: fadeInUp 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+      }
+
+      .hero-art {
+        animation: slideInFromRight 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+      }
+
+      .hero-art img {
+        animation: floating 3s ease-in-out infinite 1s;
+      }
+
+      .section-title {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .card {
+        animation: fadeInUp 0.8s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(20, 20, 20, 0.2);
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .service {
+        animation: fadeInUp 0.8s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .service:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(20, 20, 20, 0.15);
+      }
+
+      .service:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .service:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .service:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .service:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .service:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .about-contact-container {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .about-section {
+        animation: fadeInLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+      }
+
+      .contact-section {
+        animation: fadeInRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+      }
+
+      .btn:hover {
+        animation: pulse 0.3s ease-in-out;
+      }
+
+      footer {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
       @keyframes navDrop {
         from {
           opacity: 0;
@@ -567,6 +1068,28 @@
         to {
           opacity: 1;
           transform: none;
+        }
+      }
+
+      @keyframes mobileNavSlideIn {
+        from {
+          opacity: 0;
+          transform: scale(1.1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes mobileNavItemSlide {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
       @media (max-width: 480px) {
@@ -597,8 +1120,13 @@
         <a href="#home">Home</a>
         <a href="#services">Services</a>
         <a href="#software">Our Software</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <div class="theme-toggle" id="themeToggle">
+          <button class="theme-option" data-theme="dark">Dark</button>
+          <button class="theme-option" data-theme="light">Light</button>
+          <button class="theme-option" data-theme="github">GitHub</button>
+        </div>
         <button class="btn" onclick="window.location.href='./career.html'">
           Careers
         </button>
@@ -879,7 +1407,7 @@
         <div class="footer-col">
           <b>Contact</b><br />
           contact@bristohq.me<br />
-          +91 00000 00000<br />
+          <!-- +91 00000 00000<br /> -->
           <span style="color: var(--muted)">Punjab, India</span>
         </div>
       </div>
@@ -888,6 +1416,229 @@
       </div>
     </footer>
     <script>
+      // Theme Management
+      const themeManager = {
+        init() {
+          this.loadTheme();
+          this.setupThemeToggle();
+        },
+
+        loadTheme() {
+          const savedTheme = localStorage.getItem("bristohq-theme") || "dark";
+          this.setTheme(savedTheme);
+        },
+
+        setTheme(theme) {
+          document.documentElement.setAttribute("data-theme", theme);
+          localStorage.setItem("bristohq-theme", theme);
+          this.updateThemeToggle(theme);
+        },
+
+        updateThemeToggle(activeTheme) {
+          const themeOptions = document.querySelectorAll(".theme-option");
+          themeOptions.forEach((option) => {
+            option.classList.remove("active");
+            if (option.dataset.theme === activeTheme) {
+              option.classList.add("active");
+            }
+          });
+        },
+
+        setupThemeToggle() {
+          const themeOptions = document.querySelectorAll(".theme-option");
+          themeOptions.forEach((option) => {
+            option.addEventListener("click", () => {
+              this.setTheme(option.dataset.theme);
+            });
+          });
+        },
+      };
+
+      // Initialize theme on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        themeManager.init();
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for scroll animations
+      document.addEventListener("DOMContentLoaded", () => {
+        // Show skeleton loading for cards temporarily
+        showSkeletonLoading();
+
+        const animatedElements = document.querySelectorAll(
+          ".section-title, .card, .service, .about-contact-container, footer"
+        );
+        animatedElements.forEach((el) => {
+          el.style.animationPlayState = "paused";
+          observer.observe(el);
+        });
+      });
+
+      // Skeleton loading functionality
+      function showSkeletonLoading() {
+        const cardList = document.querySelector(".card-list");
+        const servicesList = document.querySelector(".services-list");
+
+        // Show skeleton for cards
+        if (cardList) {
+          const cards = cardList.querySelectorAll(".card");
+          cards.forEach((card) => {
+            card.classList.add("skeleton-card");
+            card.innerHTML = `
+              <div class="skeleton skeleton-header"></div>
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-button"></div>
+            `;
+          });
+
+          // Remove skeleton after 2 seconds
+          setTimeout(() => {
+            cards.forEach((card, index) => {
+              card.classList.remove("skeleton-card");
+              // Restore original content based on card index
+              if (index === 0) {
+                card.innerHTML = `
+                  <div class="product-header">
+                    <img
+                      class="product-logo"
+                      src="https://code.visualstudio.com/assets/images/code-stable.png"
+                      alt="VSCode Extensions Hub Logo"
+                    />
+                    <div class="product-title">
+                      <div>
+                        <strong style="margin-left: 5px"> VSC Extensions Hub </strong>
+                      </div>
+                      <div>
+                        <strong>
+                          <span class="status" style="background: var(--success); color: var(--primary); margin-left: 10px;">Live</span>
+                          <span class="status" style="background: #fb923c; color: var(--primary); margin-left: 10px;">Open source</span>
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text">
+                    Discover and install powerful VSCode extensions from our live hub.
+                    Boost your productivity instantly!
+                  </div>
+                  <button
+                    class="btn"
+                    onclick="window.location.href='https://vscode-extensions-hub.bristohq.me/'"
+                  >
+                    Visit Extensions Hub
+                  </button>
+                `;
+              } else if (index === 1) {
+                card.innerHTML = `
+                  <div class="product-header">
+                    <img
+                      class="product-logo"
+                      src="https://secure2fa.vercel.app/assets/safety-icon-BtVOEGR1.webp"
+                      alt="Secure 2FA Logo"
+                    />
+                    <div class="product-title">
+                      <div>
+                        <strong style="margin-left: 5px"> Secure 2FA </strong>
+                      </div>
+                      <div>
+                        <strong><span class="status">Coming Soon</span></strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text">
+                    Next-generation two-factor authentication for web, mobile, and
+                    enterprise. Currently under development.
+                  </div>
+                  <button
+                    class="btn"
+                    onclick="window.location.href='https://secure2fa.bristohq.me/'"
+                  >
+                    More info...
+                  </button>
+                `;
+              } else if (index === 2) {
+                card.innerHTML = `
+                  <div class="blank-content">
+                    <div class="blank-icon">💡</div>
+                    <strong>Coming Soon</strong>
+                    <br />
+                    <div class="text">
+                      New exciting project in development. Stay tuned for updates!
+                    </div>
+                  </div>
+                `;
+              }
+            });
+          }, 2000);
+        }
+
+        // Show skeleton for services
+        if (servicesList) {
+          const services = servicesList.querySelectorAll(".service");
+          services.forEach((service) => {
+            service.classList.add("skeleton-service");
+            service.innerHTML = `
+              <div class="skeleton skeleton-service-title"></div>
+              <div class="skeleton skeleton-service-text"></div>
+              <div class="skeleton skeleton-service-text"></div>
+              <div class="skeleton skeleton-service-text"></div>
+            `;
+          });
+
+          // Restore services content
+          setTimeout(() => {
+            const servicesContent = [
+              {
+                title: "Web Development",
+                text: "Custom websites, portals, e-commerce, and more—pixel-perfect and performant.",
+              },
+              {
+                title: "App Development",
+                text: "Android & iOS apps built with the latest tech for smooth user experiences.",
+              },
+              {
+                title: "Custom Software",
+                text: "Platforms, automation, SaaS, dashboards, and more to scale your business.",
+              },
+              {
+                title: "Consultancy & Prototyping",
+                text: "Strategy, UX/UI, product design, technical audits, and MVPs.",
+              },
+              {
+                title: "DevOps",
+                text: "CI/CD pipelines, cloud deployment, and infrastructure management for reliable, scalable products.",
+              },
+            ];
+
+            services.forEach((service, index) => {
+              service.classList.remove("skeleton-service");
+              if (servicesContent[index]) {
+                service.innerHTML = `
+                  <div class="service-title">${servicesContent[index].title}</div>
+                  ${servicesContent[index].text}
+                `;
+              }
+            });
+          }, 1500);
+        }
+      }
+
       // Smooth scrolling for nav links
       document.querySelectorAll(".nav-links a").forEach((link) => {
         link.addEventListener("click", function (e) {
